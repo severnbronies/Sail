@@ -6,7 +6,10 @@ helpCommand = new Command()
     let commandNames = Object.keys(this.commandSource.bindings),
         result = "";
     commandNames.forEach(name=>{
-      result+=buildDesciptions(name,this.commandSource.bindings[name],false);
+      let info = buildDesciptions(name,this.commandSource.bindings[name],true);
+      if(info){
+        result += info;
+      }
     });
     Command.basicReply(result,message);
   },Command.nArgs(0))
@@ -14,7 +17,7 @@ helpCommand = new Command()
 .addHandler("{command}","Lists detailed help for the given command",
   function(paramaters,message){
     let commandName = paramaters[0];
-    let result =  buildDesciptions(commandName,this.commandSource.bindings[commandName],true);
+    let result = buildDesciptions(commandName,this.commandSource.bindings[commandName],true);
     if(result === undefined){
       throw "Error: bad command";
     }
@@ -27,7 +30,7 @@ function buildDesciptions(name,command,deep){
     return;
   }
   let handlers = command.handlers;
-  if(handlers.args === null || handlers.description === null){
+  if(handlers[0].args === null || handlers[0].description === null){
     return;
   }
   if(handlers.length === 0){

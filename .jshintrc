@@ -1,0 +1,14 @@
+{
+    "curly":true,
+    "eqeqeq":true,
+    "notypeof":true,
+    "undef":false,
+    "unused":true,
+    "varstmt":true,
+    "esnext":true,
+    "globals":{
+      "module":true,
+      "require":false,
+      "console":false
+    }
+}

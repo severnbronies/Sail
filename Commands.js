@@ -1,4 +1,6 @@
 const Command = require("./Ship/Command.js");
+const Meets = require("./DataAccess/Meets.js");
+
 
 const START_WELCOME_MESSAGE = `
 Hello, I am SailBot, the helpbot for the severnbronies chat.

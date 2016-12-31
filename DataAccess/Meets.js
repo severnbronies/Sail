@@ -1,12 +1,13 @@
 const MySql = require("./MySql.js");
+const entities = require("entities");
 
 class Meet{
   constructor(obj){
-    Object.keys(obj).forEach(k=>this[k]=obj[k]);
+    Object.keys(obj).forEach(k=>this[k]=entities.decodeHTML(obj[k]));
   }
 
   asMarkdown(){
-    return `*${this.post_title}* ${this.meet_start_time}\n_${this.guid}_`;
+    return `*${this.post_title}* ${this.meet_start_time}\n${this.guid}`;
   }
 
 }
@@ -21,7 +22,7 @@ function getAllMeets(){
 
 function getUpcomingMeets(){
   return MySql.query(`
-    SELECT meta_value AS meet_start_time, wp_posts.*
+    SELECT CAST(meta_value AS DATE) AS meet_start_time, wp_posts.*
     FROM wp_postmeta LEFT JOIN wp_posts ON post_id=ID
     WHERE meta_key = 'meet_start_time' AND CAST(meta_value AS DATE) > CURDATE()
   `).then(results=>Meet.fromObjArray(results.results));

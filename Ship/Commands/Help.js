@@ -1,7 +1,7 @@
 const Command = require("../Command.js");
 
 helpCommand = new Command()
-.addHandler("","Lists all commands",
+.addHandler("","Lists help on all commands",
   function(_,message){
     let commandNames = Object.keys(this.commandSource.bindings),
         result = "";

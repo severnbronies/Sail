@@ -7,7 +7,7 @@ class Meet{
   }
 
   asMarkdown(){
-    return `*${this.post_title}* ${this.meet_start_time}\n${this.guid}`;
+    return `[${this.post_title}](${this.guid}) _${this.meet_start_time}_`;
   }
 
 }

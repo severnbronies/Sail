@@ -34,17 +34,16 @@ function buildDesciptions(name,command,deep){
     return;
   }
   if(handlers.length === 0){
-    return deep?`*${name}* - Not a known command\n`:"";
+    return deep?`/${name} - Not a known command\n`:"";
   }
   if(handlers.length === 1){
     return deep?
-      `*${name}* ${handlers[0].args}\n${handlers[0].description}\n`:
-      `*${name}* ${handlers[0].args}\n`;
+      `/${name} ${handlers[0].args}\n  ${handlers[0].description}\n`:
+      `/${name} ${handlers[0].args}\n`;
   }
-  let result = `*${name}*:\n`;
-  handlers.forEach(handle=> result += "> " +
-    (handle.args?handle.args:"_no arguments_") +
-    `: ${handle.description}\n`
+  let result = `/${name}:\n`;
+  handlers.forEach(handle => result +=
+    `  ${handle.args?handle.args+": ":""}${handle.description}\n`
   );
   return result;
 }

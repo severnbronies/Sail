@@ -26,7 +26,7 @@ module.exports = function(commandSource){
   //Upcoming command
   new Command("upcoming",commandSource)
     .addHandler("","Posts the next upcoming meet",notImplemented,Command.nArgs(0))
-    .addHandler("{location}...","Posts the next upcoming meet at any of the given locations",notImplemented,Command.atleastArgs(1));
+    .addHandler("_location(s)_","Filters the meets to the given locations",notImplemented,Command.atleastArgs(1));
 
   //Easter egg
   new Command("⬆⬆⬇⬇⬅➡⬅➡ba",commandSource)

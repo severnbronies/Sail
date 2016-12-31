@@ -14,7 +14,7 @@ helpCommand = new Command()
     Command.basicReply(result,message);
   },Command.nArgs(0))
 
-.addHandler("{command}","Lists detailed help for the given command",
+.addHandler("_command_","Lists detailed help for the given command",
   function(paramaters,message){
     let commandName = paramaters[0];
     let result = buildDesciptions(commandName,this.commandSource.bindings[commandName],true);

@@ -27,7 +27,14 @@ module.exports = function(commandSource){
 
   //Upcoming command
   new Command("upcoming",commandSource)
-    .addHandler("","Posts the next upcoming meet",notImplemented,Command.nArgs(0))
+    .addHandler("","Posts the next upcoming meet",function(parmaters,message){
+      Meets.getUpcomingMeets().then(upcoming=>{
+        let reply = upcoming.length?
+          upcoming.map(m=>m.asMarkdown()).join("\n"):
+          "They are no announced meets coming up";
+        Command.basicReply(reply,message);
+      });
+    },Command.nArgs(0))
     .addHandler("_location(s)_","Filters the meets to the given locations",notImplemented,Command.atleastArgs(1));
 
   //Easter egg

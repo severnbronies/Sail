@@ -24,3 +24,7 @@ connection.getMe().then(me=>{
   console.log("> Starting message source.");
   source.start();
 });
+
+process.on('unhandledRejection', err => {
+  console.log(`${new Date()} WARN: Unandled error in promise:`,err);
+});

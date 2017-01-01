@@ -23,9 +23,12 @@ function getAllMeets(){
 
 function getUpcomingMeets(){
   return MySql.query(`
-    SELECT CAST(meta_value AS DATE) AS meet_start_time, wp_posts.*
+    SELECT meta_value AS meet_start_time, wp_posts.*
     FROM wp_postmeta LEFT JOIN wp_posts ON post_id=ID
-    WHERE meta_key = 'meet_start_time' AND CAST(meta_value AS DATE) > CURDATE()
+    WHERE meta_key = 'meet_start_time'
+    AND post_type = 'meet'
+    AND post_status = 'publish'
+    AND CAST(meta_value AS DATE) >= CURDATE();
   `).then(results=>Meet.fromObjArray(results.results));
 }
 

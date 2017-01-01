@@ -1,5 +1,6 @@
 const MySql = require("./MySql.js");
 const entities = require("entities");
+const moment = require("moment");
 
 class Meet{
   constructor(obj){
@@ -7,7 +8,7 @@ class Meet{
   }
 
   asMarkdown(){
-    return `[${this.post_title}](${this.guid}) _${this.meet_start_time}_`;
+    return `[${this.post_title}](${this.guid}) _${moment(this.meet_start_time).calendar()}_`;
   }
 
 }

@@ -22,10 +22,10 @@ class CommandSource {
     let commandName = tokens.shift();
     let atAt = commandName.indexOf("@");
     if(atAt !== -1){
-      let commandName = commandName.substr(0,atAt);
-      if (commanName.substr(atAt+1) !== this.botUsername){
+      if (commandName.substr(atAt+1) !== this.botUsername){
         return;
       }
+      commandName = commandName.substr(0,atAt);
     }
     commandName = commandName.toLowerCase();
     if(!(commandName in this.bindings)){

@@ -76,6 +76,7 @@ function getUpcomingMeets(){
 
 let locationTable;
 function updateLocationTable(){
+  console.log("Updating meet location table...");
   return MySql.query(`
     SELECT post_id, meta_value
     FROM wp_postmeta
@@ -83,6 +84,7 @@ function updateLocationTable(){
   `).then(results=>{
     locationTable = {};
     results.results.forEach(row=>locationTable[row.post_id]=row.meta_value);
+    console.log("Meet location table updated...");
     return locationTable;
   });
 }

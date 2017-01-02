@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "entities": "^1.1.1",
-    "mysql": "^2.12.0"
+    "mysql": "^2.12.0",
+    "php-serialization": "0.0.4"
   }
 }

@@ -3,7 +3,8 @@ const Connection = require("./Ship/Connection.js");
 const MessageRouter = require("./Ship/MessageRouter.js");
 const CommandSource = require("./Ship/CommandSource.js");
 
-const helpCommand = require("./Ship/Commands/Help.js");
+const Commands = require("./Ship/Commands");
+
 const bindOurCommands = require("./Commands.js");
 
 const config = require("./config.json");
@@ -19,12 +20,14 @@ connection.getMe().then(me=>{
   console.log(`> Response. We are "${me.username}".`);
   console.log("> Binding commands to command source.");
   commandSource = new CommandSource(messageSource,me.username);
-  helpCommand.bind("help",commandSource);
+  Commands.bindCommands({
+    help:"Help",
+    about:"About"
+  },commandSource);
   bindOurCommands(commandSource);
   console.log("> Starting message source.");
   source.start();
 });
-
 
 process.on('unhandledRejection', err => {
   console.log(`${new Date()} WARN: Unandled error in promise:`,err);

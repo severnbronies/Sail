@@ -43,7 +43,7 @@ class Meet{
   }
 
   asMarkdown(){
-    return `[${this.post_title}](${this.guid}) ${moment(this.meet_start_time).calendar()} at ${this.meet_location}`;
+    return `[${this.post_title}](${this.guid}) ${moment(this.meet_start_time).calendar()} in ${this.meet_location}`;
   }
 
 }
@@ -69,7 +69,8 @@ function getUpcomingMeets(){
     WHERE meta_key = 'meet_start_time'
     AND post_type = 'meet'
     AND post_status = 'publish'
-    AND CAST(meta_value AS DATE) >= CURDATE();
+    AND CAST(meta_value AS DATE) >= CURDATE()
+    ORDER BY meta_value ASC;
   `).then(results=>Meet.fromObjArray(results.results));
 }
 

@@ -19,12 +19,11 @@ class Connection {
         return r.result;
       }
       throw {
-        error_code:r.error_code,
+	        error_code:r.error_code,
         description:r.description
       };
     });
   }
-  
 }
 
 [

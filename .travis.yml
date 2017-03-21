@@ -1,0 +1,3 @@
+script:
+  - git log HEAD^..HEAD
+  - git diff-tree --check HEAD^..HEAD

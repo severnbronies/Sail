@@ -1,0 +1,3 @@
+script:
+  - git log $TRAVIS_BRANCH..HEAD
+  - git diff-tree --check $TRAVIS_BRANCH..HEAD

@@ -44,12 +44,12 @@ class Meet{
 
   asMarkdown(){
     const timeFormat = {
-      sameDay: '[Today at] H:mma',
-      nextDay: '[Tomorrow at] H:mma',
-      nextWeek: 'dddd [at] H:mma',
+      sameDay: '[Today at] h:mma',
+      nextDay: '[Tomorrow at] h:mma',
+      nextWeek: 'dddd [at] h:mma',
       lastDay: '[Yesterday]',
       lastWeek: '[Last] dddd',
-      sameElse: 'Do MMMM [at] H:mma'
+      sameElse: 'Do MMMM [at] h:mma'
     };
     return `[${this.post_title}](${this.guid}) ${moment(this.meet_start_time).calendar(null, timeFormat)} in ${this.meet_location}`;
   }

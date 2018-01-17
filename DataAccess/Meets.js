@@ -22,14 +22,8 @@ class Meet{
       this.meet_end_time = meta.meet_end_time;
       return getLocationTable();
     }).then(locationTable => {
-      let usedLocations = {};
-      let locData = phpUnserialize(meta.meet_location);
-      Object.keys(locData).forEach(k=>
-        usedLocations[locationTable[locData[k]]] = 1
-      );
-
-      this.meet_locations = Object.keys(usedLocations);
-      console.log(this.meet_locations);
+      return this.populateLocations(locationTable);
+    }).then(()=>{
       if(this.meet_locations.length === 0){
         this.meet_location = "no specified location";
       } else if (this.meet_locations.length === 1){
@@ -42,6 +36,23 @@ class Meet{
     });
   }
 
+  populateLocations(locationTable,forced){
+    let usedLocations = {};
+    let locData = phpUnserialize(meta.meet_location);
+    let reloadCahced = false;
+    Object.keys(locData).forEach(k=>
+      if (!(locData[k] in locationTable)){
+          reloadCahced = true
+      }
+      usedLocations[locationTable[locData[k]]] = 1
+    );
+    if (reloadCahced && !forced) {
+      return getLocationTable(true)
+        .then(lt=>this.populateLocations(lt,true))
+    }
+    this.meet_locations = Object.keys(usedLocations);
+  }
+  
   asMarkdown(){
     const timeFormat = {
       sameDay: '[Today at] h:mma',
